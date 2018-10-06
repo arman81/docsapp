@@ -7,12 +7,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <title>{% block head_title %}Dashboard{% endblock %}</title>
+    <title>{% block head_title %}Driver App{% endblock %}</title>
     <style>
 		table {
 		    font-family: arial, sans-serif;
 		    border-collapse: collapse;
-		    width: 100%;
+		    width: 30%;
 		}
 
 		td, th {
@@ -25,23 +25,38 @@
 		    background-color: #dddddd;
 		}
 	</style>
+  
+{% block script %}
+
+  <script type="text/javascript">
+    function select_ride(id,req_id){
+       $.post(".", {driver_id:id,req_id:req_id,csrfmiddlewaretoken:'{{ csrf_token }}'}, function(data){
+        console.log(data)
+        alert(data)
+    });
+    }
+  </script>
+  {% endblock %}
   	</head>
   	<body>
             <table>
             <tr>
-            	<th>Request ID</th>
-            	<th>Customer ID</th>
-            	<th>Time Elapsed</th>
-            	<th>Status</th>
-            	<th>Driver</th>
-            </tr>
-            {% for request in ride_requests %}
+            	<th>Waiting</th>
+            </tr>  
+            {% for ride in waiting %}
                <tr>
-               	<td>{{ request.id }}</td>
-                <td>{{ request.customer_id }}</td>
-                <td>{{ request.time_elapsed }}</td>
-                <td>{{ request.status }}</td>
-                <td>{{ request.driver }}</td>
+      <td>Req.ID:{{ ride.id }} &nbsp; Cust.ID:{{ ride.customer.customer_id }} &nbsp; <button type="button" class="btn btn-info" onclick="select_ride('{{ id }}','{{ ride.id }}');">Select</button> </td>
+               </tr>
+            {% endfor %}
+            </table>
+            
+            <table>
+            <tr>
+            <th>Ongoing</th>
+            </tr>  
+            {% for ride in ongoing %}
+               <tr>
+                <td>Req.ID : {{ ride.id }}   Cust.ID: {{ ride.customer.customer_id }}</td>
                </tr>
             {% endfor %}
             </table>

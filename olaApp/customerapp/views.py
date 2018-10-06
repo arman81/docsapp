@@ -18,7 +18,6 @@ def index(request):
 									start_time=datetime.datetime.now(),
 									status='waiting')
 			form_new = RequestAddForm()
-			print('Now returning HttpResponse')
 			return render(request, 'customerApp.html',{'form':form_new,'added':1})	
 		except Exception as e:
 			raise e
