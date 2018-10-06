@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>CustomerApp</title>
+</head>
+<body>
+	{% block script %}
+		    {% if added %}
+		    <script>
+ 		   		alert("Request Added successfully");
+			</script>
+            {% endif %}
+	{% endblock%}
+<div class="modal hide fade" id="myModal">
+
+  <form name="form1" class="form-horizontal" method="post" id="all" action="./customerapp.html">{% csrf_token %}
+    <div class="modal-body">
+      <div class="box-content">
+        <fieldset>
+          <div class="control-group">
+            <label class="control-label">Customer ID</label>
+            <div class="controls">
+              {{ form.customer_id }}
+            </div>
+          </div>
+      <input type='submit' value='Ride Now' name='add_subject' class='btn btn-primary'/>
+    </div>
+  </form>
+</div>
+</body>
+</html>
