@@ -16,8 +16,7 @@ def index(request):
 		# 	time_elapsed = time_elapsed.total_seconds()/60
 		# 	if(time_elapsed >= 5):
 		# 		request.status = 'completed'
-		# 		request.save()
-		print("Beech mein hai")		
+		# 		request.save()		
 		for ride in ride_requests:
 			req = {}
 			req['id'] = ride.id
