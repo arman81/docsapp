@@ -72,7 +72,7 @@
             </tr>  
             {% for ride in complete %}
                <tr>
-                <td>Req.ID : {{ ride.id }}   Cust.ID: {{ ride.customer.customer_id }}</td>
+                <td>Req.ID : {{ ride.request.id }}   Cust.ID: {{ ride.customer.customer_id }}</td>
                </tr>
             {% endfor %}
             </table>
