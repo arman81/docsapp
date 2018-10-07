@@ -12,7 +12,7 @@
 		table {
 		    font-family: arial, sans-serif;
 		    border-collapse: collapse;
-		    width: 30%;
+		    width: 32%;
 		}
 
 		td, th {
@@ -39,7 +39,11 @@
   {% endblock %}
   	</head>
   	<body>
-            <table>
+                  <div>
+            <button type="button" class="btn btn-info" onclick="location.reload();">Refresh</button>
+            </div>
+      <div>
+            <table style="float: left;">
             <tr>
             	<th>Waiting</th>
             </tr>  
@@ -50,16 +54,29 @@
             {% endfor %}
             </table>
             
-            <table>
+            <table style="float: left;">
             <tr>
             <th>Ongoing</th>
-            </tr>  
+            </tr>
             {% for ride in ongoing %}
                <tr>
                 <td>Req.ID : {{ ride.id }}   Cust.ID: {{ ride.customer.customer_id }}</td>
                </tr>
             {% endfor %}
             </table>
-            <button type="button" class="btn btn-info" onclick="location.reload();">Refresh</button>
- 	 </body>
+
+
+            <table style="float: left;">
+            <tr>
+            <th>Complete</th>
+            </tr>  
+            {% for ride in complete %}
+               <tr>
+                <td>Req.ID : {{ ride.id }}   Cust.ID: {{ ride.customer.customer_id }}</td>
+               </tr>
+            {% endfor %}
+            </table>
+            </div>
+
+   </body>
 </html>

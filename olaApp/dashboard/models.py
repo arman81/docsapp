@@ -4,6 +4,8 @@ from django.db import models
 # Create your models here.
 from driverapp.models import Driver
 from customerapp.models import Customer
+from datetime import timezone
+#dt.replace(tzinfo=timezone.utc)
 # Create your models here.
 REQUEST_CHOICES = (
 	('wating','wating'),

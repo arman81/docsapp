@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,HttpResponse
 from dashboard.models import Request,CompleteRequest
 from driverapp.models import Driver
 import json
@@ -11,9 +11,9 @@ def get_driver_panel(request,id):
 			print(waiting)
 			driver = Driver.objects.get(id=id)
 			ongoing = Request.objects.filter(status='ongoing',driver=driver)
-			#completed = CompleteRequests.objects.get(driver=driver_detail)
-			ongoing = []
-			completed = []
+			completed = CompleteRequest.objects.filter(driver=driver)
+			print("Complete List")
+			print(completed)
 			return render(request, 'driverApp.html',{'waiting':waiting,'ongoing':ongoing,'complete':completed,'id':id})
 		except Exception as e:
 			print("ERror")
@@ -30,8 +30,11 @@ def get_driver_panel(request,id):
 			driver = Driver.objects.get(id=driver_id)
 			request = Request.objects.get(id=request_id)
 			print("In between request")
+			print(len(Request.objects.filter(driver=driver,status='ongoing')))
 			if(request.status != 'waiting'):
-				return HttpResponse(json.dumps('Ride not available'))
+				return HttpResponse(json.dumps('Ride not available'))			
+			elif(len(Request.objects.filter(driver=driver,status='ongoing')) > 0):
+				return HttpResponse(json.dumps('You are already on a ride'))
 			else:
 				print("In else")
 				request.status = 'ongoing'
