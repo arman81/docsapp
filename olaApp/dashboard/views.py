@@ -21,8 +21,7 @@ def index(request):
 			if(time_elapsed >= 5 and ride.driver != None):
 				ride.status = 'completed'
 				complete,created = CompleteRequest.objects.get_or_create(driver=ride.driver,request=ride)
-				ride.save()
-		print("Beech mein hai")		
+				ride.save()	
 		for ride in ride_requests:
 			req = {}
 			req['id'] = ride.id
